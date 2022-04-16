@@ -1,0 +1,5 @@
+name: record-of-records
+recipe: lamp
+config:
+  webroot: .
+  php: 7.4

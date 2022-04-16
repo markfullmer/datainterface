@@ -1,0 +1,15 @@
+{
+    "name": "markfullmer/records",
+    "description": "A simple list of data, semantically: records",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mark Fullmer",
+            "email": "mfullmer@gmail.com"
+        }
+    ],
+    "require": {
+        "league/csv": "^9.8"
+    }
+}
