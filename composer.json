@@ -1,6 +1,6 @@
 {
-    "name": "markfullmer/records",
-    "description": "A simple list of data, semantically: records",
+    "name": "markfullmer/datainterface",
+    "description": "Web interface for filtering records from a CSV file",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -9,6 +9,11 @@
             "email": "mfullmer@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "markfullmer\\datainterface\\": "src/"
+        }
+    },
     "require": {
         "league/csv": "^9.8"
     }
