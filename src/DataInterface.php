@@ -79,11 +79,14 @@ class DataInterface {
       }
       $output[] = '<tr>';
       foreach ($record as $key => $value) {
-        if (isset($value) && $value !== "" && in_array($key, $this->options['table_columns'])) {
+        if (in_array($key, $this->options['table_columns'])) {
           $output[] = '<td>' . $value . '</td>';
         }
       }
       $output[] = '</tr>';
+    }
+    if (!in_array('<tr>', $output)) {
+      return 'No records match this criteria.';
     }
     $output[] = '</table></div>';
     return implode("", $output);
@@ -102,17 +105,21 @@ class DataInterface {
         if (!isset($filters[$header])) {
           $filters[$header] = [];
         }
-        if (strpos($record[$header], ';') === FALSE && !in_array($record[$header], $filters[$header])) {
+        if (!empty($record[$header]) && strpos($record[$header], ';') === FALSE && !in_array($record[$header], $filters[$header])) {
           $filters[$header][] = trim($record[$header]);
         }
       }
+    }
+    foreach ($filters as &$filter_values) {
+      asort($filter_values);
     }
     return $filters;
   }
 
   public function buildForm() {
+    $location = '//' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
     $output = [];
-    $output[] = '<form action="//' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] . '" method="POST">';
+    $output[] = '<form action="' . $location . '" method="POST">';
     foreach ($this->filters as $key => $values) {
       $name = md5($key);
       $output[] = '<select name="' . $name . '">';
@@ -126,7 +133,7 @@ class DataInterface {
       }
       $output[] = '</select>';
     }
-    $output[] = '<div><input type="submit" value="Filter"><button><a href="//' . $_SERVER['SERVER_NAME'] . '">Reset</a></button></div></form>';
+    $output[] = '<div><input type="submit" value="Filter"><button><a href="' . $location . '">Reset</a></button></div></form>';
     return implode("", $output);
   }
 }
