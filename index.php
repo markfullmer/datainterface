@@ -1,13 +1,13 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'head.html';
+require 'head.php';
 
 ?>
 <div class="container">
   <div class="row">
     <h1>Auto-Parsing Data Search Interface</h1>
-    <h3><a href="https://github.com/markfullmer/records">https://github.com/markfullmer/records</a></h3>
+    <h3><a href="https://github.com/markfullmer/records">https://github.com/markfullmer/datainterface</a></h3>
     <p>This is a PHP library that will automatically parse a CSV file and generate a search interface, displaying results in a table.</p>
     <p>The library takes a CSV file with a header row as its input, as well as arguments for which column names should be filterable and which columns should display in the table.</p>
     <h3>Examples</h3>

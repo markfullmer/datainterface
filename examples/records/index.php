@@ -1,7 +1,7 @@
 <?php
 
 require '../../vendor/autoload.php';
-require '../../head.html';
+require '../../head.php';
 
 use markfullmer\datainterface\DataInterface;
 
