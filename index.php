@@ -24,7 +24,8 @@ require 'head.html';
     <pre><code>Artist,Title,Year
 America,America,1971
 Eric Andersen,Bout Changes 'n' Things Take 2,1966</code></pre>
-    2. Add this PHP library to your project in the standard way (e.g., `composer require markfullmer/records`).
+    2. Add this PHP library to your project in the standard way:
+<pre><code>composer require markfullmer/datainterface</code></pre>
     3. Instantiate the data as a PHP class object. In the example below, the code is being instructed to create a filter for 'Year' and 'Genre' (but not 'Artist') and to display 'Artist', 'Title', and 'Year' in the table:
     <pre><code>&lt;?php
 use markfullmer\datainterface\DataInterface;
