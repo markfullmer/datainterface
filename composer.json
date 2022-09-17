@@ -1,7 +1,7 @@
 {
     "name": "markfullmer/datainterface",
     "description": "Web interface for filtering records from a CSV file",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {

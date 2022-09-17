@@ -10,7 +10,7 @@ The library takes a CSV file with a header row as its input, as well as argument
 - [LP records](https://records.markfullmer.com/examples/records)
 
 ### Specifications & Usage
-1. Provide a standard format CSV file with a header row. A simple example is below:
+1. Create a standard-format CSV file with a header row. A simple example is below:
 
 ```
 Artist,Title,Year
@@ -18,9 +18,17 @@ America,America,1971
 Eric Andersen,Bout Changes 'n' Things Take 2,1966
 ```
 
-2. Instantiate the data as a PHP class object. In the example below, the code is being instructed to create a filter for 'Year' and 'Genre' (but not 'Artist') and to display 'Artist', 'Title', and 'Year' in the table:
+2. Add this PHP library to your project in the standard way:
+
+```
+composer require markfullmer/records
+```
+
+3. Instantiate the data as a PHP class object. In the example below, the code is being instructed to create a filter for 'Year' and 'Genre' (but not 'Artist') and to display 'Artist', 'Title', and 'Year' in the table:
 
 ```php
+use markfullmer\datainterface\DataInterface;
+
 $app = new DataInterface('records.csv', [
   'title' => 'List of LPs',
   'filters' => ['Year', 'Genre'],
@@ -28,7 +36,7 @@ $app = new DataInterface('records.csv', [
 ]);
 ```
 
-3. Render the parts of the interface as desired:
+4. Render the parts of the interface as desired:
 
 ```php
 echo $app->options['title'];
