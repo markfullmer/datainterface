@@ -3,17 +3,19 @@
 namespace markfullmer\datainterface;
 
 use League\Csv\Reader;
+use League\Csv\Writer;
 use League\Csv\Statement;
 use League\Csv\ResultSet;
+use GuzzleHttp\Client;
 
 /**
  * Application View logic.
  */
 class DataInterface {
 
-  public string $file;
-
   public array $options = [
+    'file' => '',
+    'url' => '',
     'filters' => [],
     'table_columns' => [],
     'title' => '',
@@ -32,10 +34,29 @@ class DataInterface {
    * @param array $options
    *    Display options for the form.
    */
-  public function __construct($file, $options) {
-    $this->file = $file;
+  public function __construct($options) {
     $this->options = $options;
-    $reader = Reader::createFromPath($this->file, 'r');
+    if (isset($options['file'])) {
+      $reader = Reader::createFromPath($options['file'], 'r');
+    }
+    elseif (isset($options['url'])) {
+      $stored_file = md5($options['url']) . '.csv';
+      if (file_exists($stored_file) && !isset($_GET['reset'])) {
+        $reader = Reader::createFromPath($stored_file, 'r');
+        print_r('Retrieving stored file...');
+      }
+      else {
+        $client = new Client();
+        $response = $client->get($options['url']);
+        if ($response->getStatusCode() !== 200) {
+          echo 'CSV could not be loaded.';
+          die();
+        }
+        $body = $response->getBody();
+        file_put_contents($stored_file, $body);
+        $reader = Reader::createFromString($body);
+      }
+    }
     $reader->setHeaderOffset(0);
     $this->records = Statement::create()->process($reader);
     $this->filters = $this->buildFilters();

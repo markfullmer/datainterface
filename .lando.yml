@@ -1,5 +1,6 @@
-name: record-of-records
-recipe: lamp
+name: search-interface
+recipe: symfony
 config:
-  webroot: .
-  php: 7.4
+  webroot: public_html
+  appserver:
+    type: 'php:8.1'

@@ -1,21 +1,21 @@
 # Auto-Parsing Data Search Interface
 
-This is a PHP library that will automatically parse a CSV file and generate a search interface, displaying results in a table.
-
-The library takes a CSV file with a header row as its input, as well as arguments for which column names should be filterable and which columns should display in the table.
+This [PHP](https://php.net) library will automatically parse a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) file and generate a search interface, displaying results in a table.
 
 ### Examples
 
-- [Short stories](https://records.markfullmer.com/examples/stories)
-- [LP records](https://records.markfullmer.com/examples/records)
+- [Corpus of short stories openings](https://records.markfullmer.com/examples/stories)
+- [List of LP records](https://records.markfullmer.com/examples/records)
+
+The library takes a CSV file with a header row as its input, as well as arguments for which column names should be filterable and which columns should display in the table. The library provides two main methods for rendered output: the form, and the table.
 
 ### Specifications & Usage
 1. Create a standard-format CSV file with a header row. A simple example is below:
 
 ```
-Artist,Title,Year
-America,America,1971
-Eric Andersen,Bout Changes 'n' Things Take 2,1966
+Artist,Title,Year,Genre
+America,America,1971,Rock
+Eric Andersen,Bout Changes 'n' Things Take 2,1966,Rock
 ```
 
 2. Add this PHP library to your project in the standard way:
@@ -29,12 +29,26 @@ composer require markfullmer/datainterface
 ```php
 use markfullmer\datainterface\DataInterface;
 
-$app = new DataInterface('records.csv', [
+$app = new DataInterface([
+  'file' => 'records.csv',
   'title' => 'List of LPs',
   'filters' => ['Year', 'Genre'],
   'table_columns' => ['Artist', 'Title', 'Year'],
 ]);
 ```
+
+The library also supports reading CSV data over HTTP (including public, [published Google Sheets as CSV](https://support.google.com/a/users/answer/9308870?hl=en)). To use this approach, provide a `url` parameter:
+
+```php
+$app = new DataInterface([
+  'file' => 'https://example.com/records.csv',
+  'title' => 'List of LPs',
+  'filters' => ['Year', 'Genre'],
+  'table_columns' => ['Artist', 'Title', 'Year'],
+]);
+```
+
+If reading data over HTTP, the library stores the URL in the filesystem for performance reasons. To refresh the request, add `?reset` to the website URL.
 
 4. Render the parts of the interface as desired:
 
@@ -46,3 +60,8 @@ echo $app->buildTable();
 
 ### Features
 - Metadata columns can have multiple values. These should be separated by a semicolon. For example, for an entry that has metadata relating to "Genre" of "Horror" and "Thriller", the CSV file's row for that metadata should be entered as "Horror;Thriller".
+
+### Possible enhancements
+- Support other data structure inputs, such as JSON
+- Keyword search (taking column names as parameters for targets)
+- Cache parsing of data for filters for performance

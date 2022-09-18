@@ -1,8 +1,6 @@
 <?php
-
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 require 'head.php';
-
 ?>
 <div class="container">
   <div class="row">
