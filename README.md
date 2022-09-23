@@ -1,5 +1,7 @@
 # Auto-Parsing Data Search Interface
 
+### https://github.com/markfullmer/datainterface
+
 This [PHP](https://php.net) library will automatically parse a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) file and generate a search interface, displaying results in a table.
 
 ### Examples

@@ -17,5 +17,8 @@
     "require": {
         "league/csv": "^9.8",
         "guzzlehttp/guzzle": "^7.5"
+    },
+    "require-dev": {
+        "erusev/parsedown": "^1.7"
     }
 }
