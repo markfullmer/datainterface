@@ -7,3 +7,4 @@ $parser = new Parsedown();
 echo '<div class="container">';
 echo $parser->text($markdown);
 echo '</div>';
+require 'foot.php';

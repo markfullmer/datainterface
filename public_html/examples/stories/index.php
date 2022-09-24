@@ -24,3 +24,5 @@ $app = new DataInterface([
     <?php echo $app->buildTable(); ?>
   </div>
 </div>
+<?php
+require '../../foot.php';

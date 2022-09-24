@@ -11,7 +11,4 @@
   <meta property="og:url" content="https://records.markfullmer.com/" />
   <meta property="og:site_name" content="Search Interface for CSV data" />
   <link rel="canonical" href="https://records.markfullmer.com/" />
-  <style>
-    <?php require 'style.css'; ?>
-  </style>
 </head>
