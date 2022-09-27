@@ -41,7 +41,7 @@ class DataInterface {
     }
     elseif (isset($options['url'])) {
       $stored_file = md5($options['url']) . '.csv';
-      if (file_exists($stored_file) && !isset($_GET['reset'])) {
+      if (file_exists($stored_file) && !isset($_REQUEST['reset'])) {
         $reader = Reader::createFromPath($stored_file, 'r');
         print_r('Retrieving stored file...');
       }
@@ -153,6 +153,18 @@ class DataInterface {
         $output[] = '<option value="' .  $i . '" ' . $selected . '>' . $i . '</option>';
       }
       $output[] = '</select>';
+    }
+    if (isset($this->options['url'])) {
+      $output[] = '<input type="hidden" name="url" value="' . $this->options['url'] . '" />';
+    }
+    if (isset($this->options['title'])) {
+      $output[] = '<input type="hidden" name="title" value="' . $this->options['title'] . '" />';
+    }
+    if (isset($this->options['filters'])) {
+      $output[] = '<input type="hidden" name="filters" value="' . implode(',', $this->options['filters']) . '" />';
+    }
+    if (isset($this->options['table_columns'])) {
+      $output[] = '<input type="hidden" name="table" value="' . implode(',', $this->options['table_columns']) . '" />';
     }
     $output[] = '<div><input type="submit" value="Filter"><button><a href="' . $location . '">Reset</a></button></div></form>';
     return implode("", $output);
