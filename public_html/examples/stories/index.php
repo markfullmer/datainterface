@@ -21,7 +21,7 @@ $app = new DataInterface([
     }
     ?>
     <?php echo $app->buildForm(); ?>
-    <?php echo $app->buildTable(); ?>
+    <?php echo 'here' . $app->buildTable(); ?>
   </div>
 </div>
 <?php

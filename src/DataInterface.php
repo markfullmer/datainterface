@@ -101,7 +101,7 @@ class DataInterface {
       $output[] = '<tr>';
       foreach ($record as $key => $value) {
         if (in_array($key, $this->options['table_columns'])) {
-          $output[] = '<td>' . $value . '</td>';
+          $output[] = '<td>' . nl2br($value) . '</td>';
         }
       }
       $output[] = '</tr>';
